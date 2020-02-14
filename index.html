@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>Нажимайте на кнопки чтобы узнать текущее время</p>
+		<button-time></button-time>
+		<button-time></button-time>
+		<button-time></button-time>
+	</div>
+
+	<template id="time">
+		<button @click="date=new Date()">{{ date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() }}</button>
+	</template>	
+</body>
+<script type="text/javascript">
+		var TimeComponent = { //Переменная для локальной регистрации компонента
+			data: function () {
+		    	return {
+		      	date: new Date(),
+		      	time: "__:__:__"
+		    	}
+		  	},
+		  	template: '#time' }
+		Vue.component('button-time', { //Глобальная регистрация компонента
+		  data: function () {
+		    return {
+		      date: new Date(),
+		      time: "__:__:__"
+		    }
+		  },
+		  template: '#time'
+		})
+		var vm1 = new Vue({
+			el: "#app",
+			components: { 
+				'button-time' : TimeComponent //Локальная регистрация компонента
+			},
+			data: {
+			}
+		})
+</script>
+<!-- <style type="text/css">
+
+</style> -->
+</html>
